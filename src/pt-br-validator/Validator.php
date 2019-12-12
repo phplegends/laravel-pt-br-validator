@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace PHPLegends\PtBrValidator;
 
@@ -8,7 +8,7 @@ use Illuminate\Validation\Validator as BaseValidator;
 * This class is part of PHPLegends package
 *
 * @author Wallace de Souza Vizerra <wallacemaxters@gmail.com>
-* @author Guilherme Nascimento 
+* @author Guilherme Nascimento
 */
 
 class Validator extends BaseValidator
@@ -21,9 +21,9 @@ class Validator extends BaseValidator
     */
     protected function validateCelularComDdd($attribute, $value)
     {
-        return preg_match('/^\(\d{2}\)\d{4,5}-\d{4}$/', $value) > 0;
+        return preg_match('/^\(\d{2}\)\s?\d{4,5}-\d{4}$/', $value) > 0;
     }
- 
+
     /**
     * Valida o formato do telefone junto com o ddd
     * @param string $attribute
@@ -33,7 +33,7 @@ class Validator extends BaseValidator
 
     protected function validateTelefoneComDdd($attribute, $value)
     {
-        return preg_match('/^\(\d{2}\)\d{4}-\d{4}$/', $value) > 0;  
+        return preg_match('/^\(\d{2}\)\d{4}-\d{4}$/', $value) > 0;
     }
 
 
@@ -45,7 +45,7 @@ class Validator extends BaseValidator
     */
     protected function validateCelular($attribute, $value)
     {
-        return preg_match('/^\d{4,5}-\d{4}$/', $value) > 0;   
+        return preg_match('/^\d{4,5}-\d{4}$/', $value) > 0;
     }
 
     /**
@@ -156,7 +156,7 @@ class Validator extends BaseValidator
         // Trecho retirado do respect validation
 
         $ret = false;
-        
+
         if ((strlen($input = preg_replace('/[^\d]/', '', $value)) == 11)
             && (str_repeat($input[1], 11) != $input)) {
             $dsc = 0;
@@ -177,7 +177,7 @@ class Validator extends BaseValidator
             for ($i = 0, $j = 1, $v = 0; $i < 9; ++$i, ++$j) {
 
                 $v += (int) $input[$i] * $j;
-                
+
             }
 
             $vl2 = ($x = ($v % 11)) >= 10 ? 0 : $x - $dsc;
